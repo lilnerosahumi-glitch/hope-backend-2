@@ -4,13 +4,14 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
+
+// IMPORTANT FIX: Remove duplicate CORS call!
 // Allow all origins for deployment
 app.use(cors({
   origin: '*',
   credentials: true
 }));
 
-app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 
 // ===========================================
@@ -49,7 +50,6 @@ app.get('/health', (req, res) => {
   res.json({ 
     status: 'OK', 
     message: 'Hope Project Backend',
-    port: 5001,
     counts: {
       letters: database.letters.length,
       resources: database.resources.length,
@@ -244,12 +244,12 @@ app.get('/api/resources', (req, res) => {
 // ===========================================
 // START SERVER
 // ===========================================
+// IMPORTANT FIX: Use environment variable for port
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
   console.log('╔══════════════════════════════════════════╗');
   console.log('║   🎉 HOPE PROJECT BACKEND RUNNING!      ║');
-  console.log('╠══════════════════════════════════════════╣');
-  console.log('║  🌐 http://localhost:5001                ║');
+  console.log(`║  🌐 Port: ${PORT}                        ║`);
   console.log('║  📊 Health: /health                      ║');
   console.log('║  👤 Auth: /api/auth/login                ║');
   console.log('║  🎨 Public Boards: /api/boards/public    ║');
