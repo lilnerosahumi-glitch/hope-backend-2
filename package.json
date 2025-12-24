@@ -1,14 +1,15 @@
 {
-  "name": "hope-backend",
+  "name": "hope-backend-worker",
   "version": "1.0.0",
-  "description": "Backend for Hope Project",
-  "main": "server.js",
+  "main": "worker.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
   },
   "dependencies": {
-    "express": "^4.18.2",
-    "cors": "^2.8.5"
+    "hono": "^4.6.7"
+  },
+  "devDependencies": {
+    "wrangler": "^3.63.0"
   }
 }
